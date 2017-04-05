@@ -1,0 +1,1 @@
+[{"id":"8fdf1f7f.908c7","type":"tab","label":"Flow 1"},{"id":"9805f5c.d82aa08","type":"out","z":"8fdf1f7f.908c7","name":"","x":607,"y":224,"wires":[]},{"id":"e2ea1254.cac28","type":"Blit","z":"8fdf1f7f.908c7","arg_freq":100,"arg_harms":40,"arg_mul":"100","arg_add":"200","x":349.5,"y":241,"wires":[["9805f5c.d82aa08",0,"audio"]]}]
