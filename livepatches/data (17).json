@@ -1,0 +1,1 @@
+[{"id":"a101a64f.195ca8","type":"tab","label":"Flow 1"},{"id":"a63c05d5.ed6e18","type":"ChenLee","z":"a101a64f.195ca8","arg_pitch":0.25,"arg_chaos":0.5,"arg_mul":1,"arg_add":0,"x":264,"y":218,"wires":[["e14d00c2.93e6",0,"audio"]]},{"id":"e14d00c2.93e6","type":"out","z":"a101a64f.195ca8","name":"","x":454,"y":248,"wires":[]}]
