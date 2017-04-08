@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('LFO',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_freq: {value:100},
+          arg_sharp:{value:0.5},
+          arg_type:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["freq","sharp","type"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"LFO";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="LFO">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_sharp">Sharpness</label>
+        <input type="text" id="node-input-arg_sharp"><br/>
+        <label for="node-input-arg_type">Type [0..7]</label>
+        <input type="text" id="node-input-arg_type"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="LFO">
+    <p>Band-limited Low Frequency Oscillator with different wave shapes. 0: Saw up (default) 1: Saw down 2: Square 3: Triangle 4: Pulse 5: Bipolar pulse 6: Sample and hold 7:Modulated Sine</p>
+</script>

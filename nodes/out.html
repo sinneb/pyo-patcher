@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    RED.nodes.registerType('out',{
+        category: 'pyo routing',
+        color: '#00ff00',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        inputLabels: ["audio"],
+        outputs:0,
+        outputLabels: [],
+        icon: "file.png",
+        label: function() {
+            return this.name||"out";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="out">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="out">
+    <p>A simple node that sends the input audio to the audio-out driver</p>
+</script>

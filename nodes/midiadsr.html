@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('MidiAdsr',{
+        category: 'pyo midi',
+        color: '#eb76c0',
+        defaults: {
+          arg_input: {value:"dummymidi['velocity']"},
+          arg_attack:{value:0.01},
+          arg_decay:{value:0.05},
+          arg_sustain:{value:0.7},
+          arg_release:{value:0.1},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:5,
+        inputLabels: ["input", "attack", "decay", "sustain", "release"],
+        outputs:1,
+        outputLabels: ["controller"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"MidiAdsr";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="MidiAdsr">
+    <div class="form-row">
+        <label for="node-input-arg_attack">Attack</label>
+        <input type="text" id="node-input-arg_attack"><br/>
+        <label for="node-input-arg_decay">Decay</label>
+        <input type="text" id="node-input-arg_decay"><br/>
+        <label for="node-input-arg_sustain">Sustain</label>
+        <input type="text" id="node-input-arg_sustain"><br/>
+        <label for="node-input-arg_release">Release</label>
+        <input type="text" id="node-input-arg_release"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="MidiAdsr">
+    <p>Midi triggered ADSR envelope generator.
+
+Calculates the classical ADSR envelope using linear segments. The envelope starts when it receives a positive value in input, this value is used as the peak amplitude of the envelope. The sustain parameter is a fraction of the peak value and sets the real sustain value. A 0 in input (note off) starts the release part of the envelope.</p>
+</script>

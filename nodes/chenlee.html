@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ChenLee',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_pitch: {value:0.25},
+          arg_chaos:{value:0.5},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["pitch","chaos"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"ChenLee";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ChenLee">
+    <div class="form-row">
+        <label for="node-input-arg_pitch">Pitch [0..1]</label>
+        <input type="text" id="node-input-arg_pitch"><br/>
+        <label for="node-input-arg_chaos">Chaos [0..1]</label>
+        <input type="text" id="node-input-arg_chaos"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ChenLee">
+    <p>Chaotic attractor for the Chen-Lee system.
+
+The ChenLee attractor is a system of three non-linear ordinary differential equations. These differential equations define a continuous-time dynamical system that exhibits chaotic dynamics associated with the fractal properties of the attractor.</p>
+</script>

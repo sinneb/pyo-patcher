@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Blit',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_freq: {value:100},
+          arg_harms:{value:40},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["freq","harms"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Blit";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Blit">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_harms">Harmonics</label>
+        <input type="text" id="node-input-arg_harms"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Blit">
+    <p>Band limited impulse train synthesis.
+
+Impulse train generator with control over the number of harmonics in the spectrum, which gives oscillators with very low aliasing.</p>
+</script>

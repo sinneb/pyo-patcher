@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('FM',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+            arg_carrier: {value:100},
+          arg_ratio:{value:0.5},
+          arg_index:{value:5},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["carrier","ratio","index"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"FM";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="FM">
+    <div class="form-row">
+        <label for="node-input-arg_carrier">Carrier</label>
+        <input type="text" id="node-input-arg_carrier"><br/>
+        <label for="node-input-arg_ratio">Ratio</label>
+        <input type="text" id="node-input-arg_ratio"><br/>
+        <label for="node-input-arg_index">Index</label>
+        <input type="text" id="node-input-arg_index"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="FM">
+    <p>A simple frequency modulation generator.
+
+Implements frequency modulation synthesis based on Chowning’s algorithm.</p>
+</script>

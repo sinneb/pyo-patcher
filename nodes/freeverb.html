@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Freeverb',{
+        category: 'pyo effects',
+        color: '#e68b59',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_size: {value:0.5},
+          arg_damp:{value:0.5},
+          arg_bal:{value:0.5},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:4,
+        inputLabels: ["input", "size","damp", "bal"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Freeverb";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Freeverb">
+    <div class="form-row">
+        <label for="node-input-arg_size">Size [0..1]</label>
+        <input type="text" id="node-input-arg_size"><br/>
+        <label for="node-input-arg_damp">Damp [0..1]</label>
+        <input type="text" id="node-input-arg_damp"><br/>
+        <label for="node-input-arg_bal">Balance dry/wet [0..1]</label>
+        <input type="text" id="node-input-arg_bal"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Freeverb">
+    <p>Implementation of Jezar’s Freeverb.
+    
+    Freeverb is a reverb unit generator based on Jezar’s public domain C++ sources, composed of eight parallel comb filters, followed by four allpass units in series. Filters on each stream are slightly detuned in order to create multi-channel effects.</p>
+</script>

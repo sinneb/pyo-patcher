@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Noise',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:0,
+        inputLabels: [],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Noise";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Noise">
+    <div class="form-row">
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Noise">
+    <p>A white noise generator.</p>
+</script>

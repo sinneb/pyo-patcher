@@ -1,0 +1,48 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Notein',{
+        category: 'pyo midi',
+        color: '#eb76c0',
+        defaults: {
+          arg_poly: {value:10},
+          arg_scale:{value:1},
+          arg_first:{value:0},
+          arg_last:{value:127},
+          arg_channel:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:0,
+        inputLabels: [],
+        outputs:2,
+        outputLabels: ["pitch", "velocity"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Notein";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Notein">
+    <div class="form-row">
+        <label for="node-input-arg_poly">Poly</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+        <label for="node-input-arg_scale">Scale (midi,hertz,transpo)</label>
+        <input type="text" id="node-input-arg_scale"><br/>
+        <label for="node-input-arg_first">Lowest midi</label>
+        <input type="text" id="node-input-arg_first"><br/>
+        <label for="node-input-arg_last">Highest midi</label>
+        <input type="text" id="node-input-arg_last"><br/>
+        <label for="node-input-arg_channel">Midi channel (0 = all)</label>
+        <input type="text" id="node-input-arg_channel"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Notein">
+    <p>Generates Midi note messages.
+
+From a Midi device, takes the notes in the range defined with first and last parameters, and outputs up to poly noteon - noteoff streams in the scale format (Midi, hertz or transpo).</p>
+</script>

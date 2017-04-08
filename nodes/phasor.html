@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Phasor',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_freq: {value:100},
+          arg_phase:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["freq","phase"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Phasor";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Phasor">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_phase">Phase</label>
+        <input type="text" id="node-input-arg_phase"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Phasor">
+    <p>A simple phase incrementor.
+
+Output is a periodic ramp from 0 to 1.</p>
+</script>

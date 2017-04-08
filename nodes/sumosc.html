@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('SumOsc',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_freq: {value:100},
+          arg_ratio:{value:0.5},
+          arg_index:{value:0.5},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["freq","ratio","index"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"SumOsc";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="SumOsc">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_ratio">Ratio</label>
+        <input type="text" id="node-input-arg_ratio"><br/>
+        <label for="node-input-arg_index">Index</label>
+        <input type="text" id="node-input-arg_index"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="SumOsc">
+    <p>Discrete summation formulae to produce complex spectra.
+
+This object implements a discrete summation formulae taken from the paper ‘The synthesis of complex audio spectra by means of discrete summation formulae’ by James A. Moorer.</p>
+</script>

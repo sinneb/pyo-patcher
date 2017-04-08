@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('SuperSaw',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_freq: {value:100},
+          arg_detune:{value:0.5},
+          arg_bal:{value:0.7},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["freq","detune","bal"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"SuperSaw";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="SuperSaw">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_detune">Detune [0..1]</label>
+        <input type="text" id="node-input-arg_detune"><br/>
+        <label for="node-input-arg_bal">Balance [0..1]</label>
+        <input type="text" id="node-input-arg_bal"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="SuperSaw">
+    <p>Roland JP-8000 Supersaw emulator.
+
+This object implements an emulation of the Roland JP-8000 Supersaw algorithm. The shape of the waveform is produced from 7 sawtooth oscillators detuned against each other over a period of time. It allows control over the depth of the detuning and the balance between central and sideband oscillators.</p>
+</script>
