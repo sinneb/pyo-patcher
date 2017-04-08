@@ -10137,6 +10137,67 @@ RED.view = (function() {
                                   inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[3]);
                                 }
 
+                            } else if (d.inputs === 5 && inputPorts.empty()) {
+                                var inputGroup = thisNode.append("g").attr("class","port_input");
+                                inputGroup.append("rect").attr("class","port").attr("rx",3).attr("ry",3).attr("width",10).attr("height",10)
+                                    .on("mousedown",function(d){portMouseDown(d,1,0);})
+                                    .on("touchstart",function(d){portMouseDown(d,1,0);})
+                                    .on("mouseup",function(d){portMouseUp(d,1,0);} )
+                                    .on("touchend",function(d){portMouseUp(d,1,0);} )
+                                    .on("mouseover",function(d) { var port = d3.select(this); port.classed("port_hovered",(mouse_mode!=RED.state.JOINING || (drag_lines.length > 0 && drag_lines[0].portType !== 1) ));})
+                                    .on("mouseout",function(d) { var port = d3.select(this); port.classed("port_hovered",false);})
+                                if(Array.isArray(d._def.inputLabels)) {
+                                  inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[0]);
+                                }
+
+                                var inputGroup = thisNode.append("g").attr("class","port_input");
+                                inputGroup.append("rect").attr("class","port").attr("rx",3).attr("ry",3).attr("width",10).attr("height",10)
+                                    .on("mousedown",function(d){portMouseDown(d,1,1);})
+                                    .on("touchstart",function(d){portMouseDown(d,1,1);})
+                                    .on("mouseup",function(d){portMouseUp(d,1,1);} )
+                                    .on("touchend",function(d){portMouseUp(d,1,1);} )
+                                    .on("mouseover",function(d) { var port = d3.select(this); port.classed("port_hovered",(mouse_mode!=RED.state.JOINING || (drag_lines.length > 0 && drag_lines[0].portType !== 1) ));})
+                                    .on("mouseout",function(d) { var port = d3.select(this); port.classed("port_hovered",false);})
+                                if(Array.isArray(d._def.inputLabels)) {
+                                  inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[1]);
+                                }
+                                
+                                var inputGroup = thisNode.append("g").attr("class","port_input");
+                                inputGroup.append("rect").attr("class","port").attr("rx",3).attr("ry",3).attr("width",10).attr("height",10)
+                                    .on("mousedown",function(d){portMouseDown(d,1,2);})
+                                    .on("touchstart",function(d){portMouseDown(d,1,2);})
+                                    .on("mouseup",function(d){portMouseUp(d,1,2);} )
+                                    .on("touchend",function(d){portMouseUp(d,1,2);} )
+                                    .on("mouseover",function(d) { var port = d3.select(this); port.classed("port_hovered",(mouse_mode!=RED.state.JOINING || (drag_lines.length > 0 && drag_lines[0].portType !== 1) ));})
+                                    .on("mouseout",function(d) { var port = d3.select(this); port.classed("port_hovered",false);})
+                                if(Array.isArray(d._def.inputLabels)) {
+                                  inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[2]);
+                                }
+                                
+                                var inputGroup = thisNode.append("g").attr("class","port_input");
+                                inputGroup.append("rect").attr("class","port").attr("rx",3).attr("ry",3).attr("width",10).attr("height",10)
+                                    .on("mousedown",function(d){portMouseDown(d,1,3);})
+                                    .on("touchstart",function(d){portMouseDown(d,1,3);})
+                                    .on("mouseup",function(d){portMouseUp(d,1,3);} )
+                                    .on("touchend",function(d){portMouseUp(d,1,3);} )
+                                    .on("mouseover",function(d) { var port = d3.select(this); port.classed("port_hovered",(mouse_mode!=RED.state.JOINING || (drag_lines.length > 0 && drag_lines[0].portType !== 1) ));})
+                                    .on("mouseout",function(d) { var port = d3.select(this); port.classed("port_hovered",false);})
+                                if(Array.isArray(d._def.inputLabels)) {
+                                  inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[3]);
+                                }
+                                
+                                var inputGroup = thisNode.append("g").attr("class","port_input");
+                                inputGroup.append("rect").attr("class","port").attr("rx",3).attr("ry",3).attr("width",10).attr("height",10)
+                                    .on("mousedown",function(d){portMouseDown(d,1,4);})
+                                    .on("touchstart",function(d){portMouseDown(d,1,4);})
+                                    .on("mouseup",function(d){portMouseUp(d,1,4);} )
+                                    .on("touchend",function(d){portMouseUp(d,1,4);} )
+                                    .on("mouseover",function(d) { var port = d3.select(this); port.classed("port_hovered",(mouse_mode!=RED.state.JOINING || (drag_lines.length > 0 && drag_lines[0].portType !== 1) ));})
+                                    .on("mouseout",function(d) { var port = d3.select(this); port.classed("port_hovered",false);})
+                                if(Array.isArray(d._def.inputLabels)) {
+                                  inputGroup.append("text").attr("stroke-width", "0px").attr("font-size", "12px").text(d._def.inputLabels[3]);
+                                }
+
                             }
                             
 
