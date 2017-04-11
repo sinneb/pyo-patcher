@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Metro',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_time: {value:1},
+          arg_poly:{value:1}
+        },
+        inputs:1,
+        inputLabels: ["time"],
+        outputs:1,
+        outputLabels: ["trigger"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Metro";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Metro">
+    <div class="form-row">
+        <label for="node-input-arg_pitch">Time between trig</label>
+        <input type="text" id="node-input-arg_time"><br/>
+        <label for="node-input-arg_chaos">Poly</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Metro">
+    <p>Generates isochronous trigger signals.
+
+A trigger is an audio signal with a value of 1 surrounded by 0s.</p>
+</script>

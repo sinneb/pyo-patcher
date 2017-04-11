@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Beat',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_time: {value:0.125},
+          arg_taps:{value:16},
+          arg_w1:{value:80},
+          arg_w2:{value:50},
+          arg_w3:{value:30},
+          arg_poly:{value:1},
+          arg_onlyonce:{value:'False'}
+        },
+        inputs:1,
+        inputLabels: ["time"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Beat";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Beat">
+    <div class="form-row">
+        <label for="node-input-arg_time">Time</label>
+        <input type="text" id="node-input-arg_time"><br/>
+        <label for="node-input-arg_taps">Taps</label>
+        <input type="text" id="node-input-arg_taps"><br/>
+        <label for="node-input-arg_w1">Prob down beats</label>
+        <input type="text" id="node-input-arg_w1"><br/>
+        <label for="node-input-arg_w2">Prob up beats</label>
+        <input type="text" id="node-input-arg_w2"><br/>
+        <label for="node-input-arg_w3">Prob weakest beats</label>
+        <input type="text" id="node-input-arg_w3"><br/>
+        <label for="node-input-arg_poly">Poly</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+        <label for="node-input-arg_poly">Once</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Beat">
+    <p>Generates algorithmic trigger patterns.
+
+A trigger is an audio signal with a value of 1 surrounded by 0s.
+
+Beat generates measures of length taps and uses weight parameters (w1, w2 and w3) to compute the chances of a beat to be present in the generated measure.</p>
+</script>

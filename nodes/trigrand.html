@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('TrigRand',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_min: {value:0},
+          arg_max:{value:1},
+          arg_port:{value:0},
+          arg_init:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["input","min","max"],
+        outputs:1,
+        outputLabels: ["value"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"TrigRand";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="TrigRand">
+    <div class="form-row">
+        <label for="node-input-arg_min">Min</label>
+        <input type="text" id="node-input-arg_min"><br/>
+        <label for="node-input-arg_max">Max</label>
+        <input type="text" id="node-input-arg_max"><br/>
+        <label for="node-input-arg_port">Portamento</label>
+        <input type="text" id="node-input-arg_port"><br/>
+        <label for="node-input-arg_init">Init value</label>
+        <input type="text" id="node-input-arg_init"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="TrigRand">
+    <p>Pseudo-random number generator.
+
+TrigRand generates a pseudo-random number between min and max values each time it receives a trigger in its input parameter. The value is kept until the next trigger.</p>
+</script>

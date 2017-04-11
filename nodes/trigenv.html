@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('TrigEnv',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_table: {value:'hann'},
+          arg_dur:{value:1},
+          arg_interp:{value:1},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["input","dur"],
+        outputs:1,
+        outputLabels: ["env"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"TrigEnv";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="TrigEnv">
+    <div class="form-row">
+        <label for="node-input-arg_table">Env table</label>
+        <input type="text" id="node-input-arg_table"><br/>
+        <label for="node-input-arg_dur">Duration</label>
+        <input type="text" id="node-input-arg_dur"><br/>
+        <label for="node-input-arg_interp">interpolation</label>
+        <input type="text" id="node-input-arg_interp"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="TrigEnv">
+    <p>Envelope reader generator.
+
+TrigEnv starts reading an envelope in dur seconds each time it receives a trigger in its input parameter.</p>
+</script>

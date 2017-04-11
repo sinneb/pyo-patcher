@@ -44,6 +44,9 @@ def createPyoScript(jsonstring):
     fileout.write("dummy = LFO(freq=0)\n")
     fileout.write("dummymidi = Notein()\n\n")
     
+    # tables
+    fileout.write("hann = HannTable()\n\n")
+    
     # write init for pyo objects
     for node in parsed_json:
         if node['type']!='tab':
@@ -69,6 +72,10 @@ def createPyoScript(jsonstring):
                 fileout.write("%s = Mixer(outs=2, chnls=10).out()\n" % (node['id']))
             elif node['type']=='Multiply':
                 fileout.write("%s = Allpass(input=[dummy]*10, delay=0, feedback=0, maxdelay=0, mul=%s)\n" % (node['id'], node['arg_mult']))
+            elif node['type']=='Metro':
+                fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
+            elif node['type']=='Beat':
+                fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
             # ordinary nodes
             else:
                 # output object                    
