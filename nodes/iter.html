@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Iter',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_choice: {value:'[300, 350, 400, 450, 500, 550]'},
+          arg_init:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["input", "choice"],
+        outputs:1,
+        outputLabels: ["value"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Iter";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Iter">
+    <div class="form-row">
+        <label for="node-input-arg_choice">Choice</label>
+        <input type="text" id="node-input-arg_choice"><br/>
+        <label for="node-input-arg_init">Init</label>
+        <input type="text" id="node-input-arg_init"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Iter">
+    <p>Triggers iterate over a list of values.
+
+Iter loops over a list of user-defined values. When a trigger is received in input, Iter moves up to the next value in the list, with wrap-around.</p>
+</script>

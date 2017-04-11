@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Biquad',{
+        category: 'pyo filters',
+        color: '#e68b59',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_freq: {value:1000},
+          arg_q:{value:1},
+          arg_type:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["input", "freq","q"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Biquad";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Biquad">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_q">Q [0..500]</label>
+        <input type="text" id="node-input-arg_q"><br/>
+        <label for="node-input-arg_type">Type [0..4]</label>
+        <input type="text" id="node-input-arg_type"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Biquad">
+    <p>A sweepable general purpose biquadratic digital filter. Filter type. Five possible values :
+0. lowpass (default) 1. highpass 2. bandpass 3. bandstop 4. allpass</p>
+</script>

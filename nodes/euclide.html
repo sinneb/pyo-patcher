@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Euclide',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_time: {value:0.125},
+          arg_taps:{value:16},
+          arg_onsets:{value:10},
+          arg_poly:{value:1}
+        },
+        inputs:1,
+        inputLabels: ["time"],
+        outputs:1,
+        outputLabels: ["trigger"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Euclide";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Euclide">
+    <div class="form-row">
+        <label for="node-input-arg_time">Time</label>
+        <input type="text" id="node-input-arg_time"><br/>
+        <label for="node-input-arg_taps">Taps</label>
+        <input type="text" id="node-input-arg_taps"><br/>
+        <label for="node-input-arg_onsets">Onsets</label>
+        <input type="text" id="node-input-arg_onsets"><br/>
+        <label for="node-input-arg_poly">Poly</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Euclide">
+    <p>Euclidean rhythm generator.
+
+This object generates euclidean trigger patterns, resulting in onsets in the rhythm to be as equidistant as possible.</p>
+</script>

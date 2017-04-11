@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('MoogLP',{
+        category: 'pyo filters',
+        color: '#e68b59',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_freq: {value:1000},
+          arg_res:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["input", "freq","res"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"MoogLP";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="MoogLP">
+    <div class="form-row">
+        <label for="node-input-arg_freq">Frequency</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_res">Resonance</label>
+        <input type="text" id="node-input-arg_res"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="MoogLP">
+    <p>A fourth-order resonant lowpass filter.
+
+Digital approximation of the Moog VCF, giving a decay of 24dB/oct.</p>
+</script>

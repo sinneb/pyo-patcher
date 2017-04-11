@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Cloud',{
+        category: 'pyo triggers',
+        color: '#ebd676',
+        defaults: {
+          arg_density: {value:10},
+          arg_poly:{value:1}
+        },
+        inputs:1,
+        inputLabels: ["density"],
+        outputs:1,
+        outputLabels: ["trigger"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Cloud";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Cloud">
+    <div class="form-row">
+        <label for="node-input-arg_density">Density</label>
+        <input type="text" id="node-input-arg_density"><br/>
+        <label for="node-input-arg_poly">Poly</label>
+        <input type="text" id="node-input-arg_poly"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Cloud">
+    <p>Generates random triggers.
+
+Generates random triggers with control over the generation density.</p>
+</script>

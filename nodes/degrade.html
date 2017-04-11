@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Degrade',{
+        category: 'pyo dynamics',
+        color: '#e68b59',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_bitdepth: {value:16},
+          arg_srscale:{value:1},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["input", "bitdepth","srscale"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Degrade";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Degrade">
+    <div class="form-row">
+        <label for="node-input-arg_bitdepth">Bitdepth [1..32]</label>
+        <input type="text" id="node-input-arg_bitdepth"><br/>
+        <label for="node-input-arg_srscale">SrScale [0,001..1]</label>
+        <input type="text" id="node-input-arg_srscale"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Degrade">
+    <p>Signal quality reducer.
+
+Degrade takes an audio signal and reduces the sampling rate and/or bit-depth as specified.</p>
+</script>

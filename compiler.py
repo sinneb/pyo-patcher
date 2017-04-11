@@ -76,6 +76,12 @@ def createPyoScript(jsonstring):
                 fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
             elif node['type']=='Beat':
                 fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
+            elif node['type']=='Cloud':
+                fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
+            elif node['type']=='Euclide':
+                fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
+            elif node['type']=='Seq':
+                fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
             # ordinary nodes
             else:
                 # output object                    

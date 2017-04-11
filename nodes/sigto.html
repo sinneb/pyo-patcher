@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('SigTo',{
+        category: 'pyo controls',
+        color: '#c68b59',
+        defaults: {
+          arg_value: {value:'dummy'},
+          arg_time: {value:0.025},
+          arg_init:{value:0},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:3,
+        inputLabels: ["value", "time","init"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"SigTo";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="SigTo">
+    <div class="form-row">
+        <label for="node-input-arg_time">Time</label>
+        <input type="text" id="node-input-arg_time"><br/>
+        <label for="node-input-arg_init">Init</label>
+        <input type="text" id="node-input-arg_init"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="SigTo">
+    <p>Convert numeric value to PyoObject signal with portamento.
+
+When value is changed, a ramp is applied from the current value to the new value. Can be used with PyoObject to apply a linear portamento on an audio signal.</p>
+</script>
