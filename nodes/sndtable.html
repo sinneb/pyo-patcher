@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('SndTable',{
+        category: 'pyo tables',
+        color: '#efefef',
+        defaults: {
+          arg_tablename: {value:"tablename"},
+          arg_path:{value:"filename"}
+        },
+        inputs:0,
+        inputLabels: [],
+        outputs:0,
+        outputLabels: [],
+        icon: "file.png",
+        label: function() {
+            return this.name||"SndTable";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="SndTable">
+    <div class="form-row">
+        <label for="node-input-arg_tablename">Unique table name</label>
+        <input type="text" id="node-input-arg_tablename"><br/>
+        <label for="node-input-arg_path">Filename</label>
+        <input type="text" id="node-input-arg_path"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="SndTable">
+    <p>Transfers data from a soundfile into a function table.</p>
+</script>

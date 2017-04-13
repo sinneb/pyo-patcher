@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Pointer2',{
+        category: 'pyo tables',
+        color: '#ebd676',
+        defaults: {
+          arg_table: {value:'tablename'},
+          arg_index:{value:'dummy'},
+          arg_interp:{value:4},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:1,
+        inputLabels: ["index"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Pointer2";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Pointer2">
+    <div class="form-row">
+        <label for="node-input-arg_table">Table</label>
+        <input type="text" id="node-input-arg_table"><br/>
+        <label for="node-input-arg_index">Index</label>
+        <input type="text" id="node-input-arg_index"><br/>
+        <label for="node-input-arg_interp">Interpolation</label>
+        <input type="text" id="node-input-arg_interp"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Pointer2">
+    <p>High quality table reader with control on the pointer position. Choice of the interpolation method. Defaults to 4.
+1. no interpolation 2. linear 3. cosinus 4. cubic</p>
+</script>

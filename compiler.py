@@ -37,6 +37,7 @@ def createPyoScript(jsonstring):
     fileout.write("from time import sleep\n")
     fileout.write("\n")
     fileout.write("s = Server()\n")
+    fileout.write("s.setInOutDevice(3)\n")
     fileout.write("s.setMidiInputDevice(99)\n")
     fileout.write("s.boot().start()\n\n")
     
@@ -45,9 +46,28 @@ def createPyoScript(jsonstring):
     fileout.write("dummymidi = Notein()\n\n")
     
     # tables
-    fileout.write("hann = HannTable()\n\n")
+    fileout.write("hann = HannTable()\n")
+    fileout.write("harm = HarmTable()\n")
+    fileout.write("log = LogTable()\n")
+    fileout.write("para = ParaTable()\n")
+    fileout.write("partial = PartialTable()\n")
+    fileout.write("saw = SawTable(order=32)\n")
+    fileout.write("sinc = SincTable()\n")
+    fileout.write("atan = AtanTable()\n")
+    fileout.write("padsynth = PadSynthTable()\n")
+    fileout.write("tuckey = WinTable(type=7)\n")
+    fileout.write("bartlett = WinTable(type=3)\n")
+    fileout.write("coslog = CosLogTable([(0,0), (4095,1), (8192,0)])\n")
     
-    # write init for pyo objects
+    # first write all tables to pyoscript
+    for node in parsed_json:
+        if node['type']!='tab':
+            if node['type']=='SndTable':
+                fileout.write("%s = SndTable(\"%s\")\n" % (node['arg_tablename'], node['arg_path']))
+                
+    fileout.write("\n")
+        
+    # write init for other pyo objects
     for node in parsed_json:
         if node['type']!='tab':
             
@@ -72,6 +92,8 @@ def createPyoScript(jsonstring):
                 fileout.write("%s = Mixer(outs=2, chnls=10).out()\n" % (node['id']))
             elif node['type']=='Multiply':
                 fileout.write("%s = Allpass(input=[dummy]*10, delay=0, feedback=0, maxdelay=0, mul=%s)\n" % (node['id'], node['arg_mult']))
+            elif node['type']=='SndTable':
+                pass
             elif node['type']=='Metro':
                 fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
             elif node['type']=='Beat':
@@ -91,9 +113,9 @@ def createPyoScript(jsonstring):
 
     # connect wires
     for node in parsed_json:
-        print "---"
-        print node['type']
-        print node
+        # print "---"
+        # print node['type']
+        # print node
 
         if node['type']!='tab':
             
@@ -101,8 +123,6 @@ def createPyoScript(jsonstring):
             wireID = 0;
             # iterate through "wires" in nodes
             for wire in node['wires']:
-                print wire
-                print wireID
                 
                 # handle special nodes
                 currentNodeID = node['id']

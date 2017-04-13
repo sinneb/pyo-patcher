@@ -1,30 +1,33 @@
 <script type="text/javascript">
-    RED.nodes.registerType('Blit',{
-        category: 'pyo generators',
-        color: '#a6bbcf',
+    RED.nodes.registerType('Osc',{
+        category: 'pyo tables',
+        color: '#ebd676',
         defaults: {
-          arg_freq: {value:100},
-          arg_harms:{value:40},
+          arg_table: {value:'tablename'},
+          arg_freq:{value:0.1},
+          arg_phase:{value:0},
           arg_mul:{value:1},
           arg_add:{value:0}
         },
         inputs:3,
-        inputLabels: ["freq","harms","mul"],
+        inputLabels: ["freq","phase","mul"],
         outputs:1,
         outputLabels: ["audio"],
         icon: "file.png",
         label: function() {
-            return this.name||"Blit";
+            return this.name||"Osc";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="Blit">
+<script type="text/x-red" data-template-name="Osc">
     <div class="form-row">
+        <label for="node-input-arg_table">Table</label>
+        <input type="text" id="node-input-arg_table"><br/>
         <label for="node-input-arg_freq">Frequency</label>
         <input type="text" id="node-input-arg_freq"><br/>
-        <label for="node-input-arg_harms">Harmonics</label>
-        <input type="text" id="node-input-arg_harms"><br/>
+        <label for="node-input-arg_phase">Phase</label>
+        <input type="text" id="node-input-arg_phase"><br/>
         <label for="node-input-arg_mul">Multiplication</label>
         <input type="text" id="node-input-arg_mul"><br/>
         <label for="node-input-arg_add">Addition</label>
@@ -32,8 +35,6 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Blit">
-    <p>Band limited impulse train synthesis.
-
-Impulse train generator with control over the number of harmonics in the spectrum, which gives oscillators with very low aliasing.</p>
+<script type="text/x-red" data-help-name="Osc">
+    <p>A simple oscillator reading a waveform table.</p>
 </script>

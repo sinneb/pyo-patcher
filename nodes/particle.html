@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Particle',{
+        category: 'pyo tables',
+        color: '#ebd676',
+        defaults: {
+          arg_table: {value:'tablename'},
+          arg_env: {value:'tablename'},
+          arg_dens:{value:50},
+          arg_pitch:{value:1},
+          arg_pos:{value:0},
+          arg_dur:{value:0.1},
+          arg_dev:{value:0.01},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:6,
+        inputLabels: ["dens","pitch","pos","dur","dev","mul"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Particle";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Particle">
+    <div class="form-row">
+        <label for="node-input-arg_table">Table</label>
+        <input type="text" id="node-input-arg_table"><br/>
+        <label for="node-input-arg_env">Env</label>
+        <input type="text" id="node-input-arg_env"><br/>
+        <label for="node-input-arg_dens">Density</label>
+        <input type="text" id="node-input-arg_dens"><br/>
+        <label for="node-input-arg_pitch">Pitch</label>
+        <input type="text" id="node-input-arg_pitch"><br/>
+        <label for="node-input-arg_pos">Position</label>
+        <input type="text" id="node-input-arg_pos"><br/>
+        <label for="node-input-arg_dur">Duration</label>
+        <input type="text" id="node-input-arg_dur"><br/>
+        <label for="node-input-arg_dev">Deviation</label>
+        <input type="text" id="node-input-arg_dev"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Particle">
+    <p>A full control granular synthesis generator.</p>
+</script>

@@ -1,26 +1,30 @@
 <script type="text/javascript">
-    RED.nodes.registerType('Phasor',{
-        category: 'pyo generators',
-        color: '#a6bbcf',
+    RED.nodes.registerType('OscTrig',{
+        category: 'pyo tables',
+        color: '#ebd676',
         defaults: {
-          arg_freq: {value:100},
+          arg_trig: {value:'dummy'},
+          arg_table: {value:'tablename'},
+          arg_freq:{value:0.1},
           arg_phase:{value:0},
           arg_mul:{value:1},
           arg_add:{value:0}
         },
-        inputs:3,
-        inputLabels: ["freq","phase","mul"],
+        inputs:4,
+        inputLabels: ["trig","freq","phase","mul"],
         outputs:1,
         outputLabels: ["audio"],
         icon: "file.png",
         label: function() {
-            return this.name||"Phasor";
+            return this.name||"OscTrig";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="Phasor">
+<script type="text/x-red" data-template-name="OscTrig">
     <div class="form-row">
+        <label for="node-input-arg_table">Table</label>
+        <input type="text" id="node-input-arg_table"><br/>
         <label for="node-input-arg_freq">Frequency</label>
         <input type="text" id="node-input-arg_freq"><br/>
         <label for="node-input-arg_phase">Phase</label>
@@ -32,8 +36,6 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Phasor">
-    <p>A simple phase incrementor.
-
-Output is a periodic ramp from 0 to 1.</p>
+<script type="text/x-red" data-help-name="OscTrig">
+    <p>An oscillator reading a waveform table with sample accurate reset signal.</p>
 </script>
