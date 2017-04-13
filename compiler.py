@@ -37,7 +37,7 @@ def createPyoScript(jsonstring):
     fileout.write("from time import sleep\n")
     fileout.write("\n")
     fileout.write("s = Server()\n")
-    fileout.write("s.setInOutDevice(3)\n")
+    #fileout.write("s.setInOutDevice(3)\n")
     fileout.write("s.setMidiInputDevice(99)\n")
     fileout.write("s.boot().start()\n\n")
     
