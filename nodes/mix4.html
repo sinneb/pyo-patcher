@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mix4',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_input1: {value:""},
+          arg_input2:{value:""},
+          arg_input3:{value:""},
+          arg_input4:{value:""},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:5,
+        inputLabels: ["input1","input2","input3","input4","mul"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"mix4";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mix4">
+    <div class="form-row">
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mix4">
+    <p>4 channel mixer</p>
+</script>

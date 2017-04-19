@@ -1,5 +1,29 @@
 #!/usr/bin/env python
 
+'''
+The MIT License
+
+Copyright (c) 2017 Arthur Bennis. http://sinneb.net
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+'''
+
 import json, sys, os, time, subprocess, itertools
 
 def getfiles(dirpath):
@@ -37,7 +61,7 @@ def createPyoScript(jsonstring):
     fileout.write("from time import sleep\n")
     fileout.write("\n")
     fileout.write("s = Server()\n")
-    #fileout.write("s.setInOutDevice(3)\n")
+    fileout.write("s.setInOutDevice(3)\n")
     fileout.write("s.setMidiInputDevice(99)\n")
     fileout.write("s.boot().start()\n\n")
     
@@ -71,6 +95,8 @@ def createPyoScript(jsonstring):
     for node in parsed_json:
         if node['type']!='tab':
             
+            #print node
+            
             # build argument list
             argumentlist = ""
             for field in node:
@@ -86,10 +112,15 @@ def createPyoScript(jsonstring):
             
             # handle special nodes
             # node: out
-            #   mixer sending all inputs to sound output -> out()
             if node['type']=='out':
                 # mixer chnls should match the poly on notein (which is max 10)
+                #   mixer sending all inputs to sound output -> out()
                 fileout.write("%s = Mixer(outs=2, chnls=10).out()\n" % (node['id']))
+            elif node['type']=='mix4':
+                # create _mixer alias
+                # downmix _mixer alias in original nodeid 
+                fileout.write("%s_mixer = Mixer(outs=2, chnls=10)\n" % (node['id']))
+                fileout.write("%s = %s_mixer[0] + %s_mixer[1]\n" % (node['id'],node['id'],node['id']))
             elif node['type']=='Multiply':
                 fileout.write("%s = Allpass(input=[dummy]*10, delay=0, feedback=0, maxdelay=0, mul=%s)\n" % (node['id'], node['arg_mult']))
             elif node['type']=='SndTable':
@@ -143,7 +174,7 @@ def createPyoScript(jsonstring):
                     for destNode in parsed_json:
                         if destNode['type']!='tab' and destNode['id']==subwire[0]:
                             destinationNodeType = destNode['type']
-
+                    
                     # handle special nodes
                     if destinationNodeType == 'out':
                         fileout.write("%s.addInput(%s,%s)\n" % (subwire[0],mixerkey,currentNodeID))
@@ -151,6 +182,16 @@ def createPyoScript(jsonstring):
                         fileout.write("%s.setAmp(%s,0,1)\n" % (subwire[0],mixerkey))
                         fileout.write("%s.setAmp(%s,1,1)\n" % (subwire[0],mixerkey))
                         mixerkey += 1
+                    elif destinationNodeType == 'mix4':
+                        if subwire[2] == 'mul':
+                            fileout.write("%s_mixer.mul = %s\n" % (subwire[0],currentNodeID))
+                        else:
+                            # add inputs to the _mixer alias
+                            fileout.write("%s_mixer.addInput(%s,%s)\n" % (subwire[0],mixerkey,currentNodeID))
+                            # left and right channel
+                            fileout.write("%s_mixer.setAmp(%s,0,1)\n" % (subwire[0],mixerkey))
+                            fileout.write("%s_mixer.setAmp(%s,1,1)\n" % (subwire[0],mixerkey))
+                            mixerkey += 1
                     elif destinationNodeType == 'Multiply':
                         if subwire[2] == 'in':
                             fileout.write("%s.input = %s\n" % (subwire[0],currentNodeID))

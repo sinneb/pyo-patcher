@@ -3,6 +3,7 @@
         category: 'pyo midi',
         color: '#eb76c0',
         defaults: {
+          name: {value:""},
           arg_ctlnumber: {value:100},
           arg_minscale:{value:0},
           arg_maxscale:{value:127},
@@ -18,12 +19,17 @@
         icon: "file.png",
         label: function() {
             return this.name||"Midictl";
+        },
+        oneditsave: function() {
+          var node = this;
+          document.getElementById("node-input-name").value = node.type + " (" + document.getElementById("node-input-arg_ctlnumber").value + ")";
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="Midictl">
     <div class="form-row">
+    <input type="hidden" id="node-input-name" placeholder="Name">
         <label for="node-input-arg_ctlnumber">Controller number</label>
         <input type="text" id="node-input-arg_ctlnumber"><br/>
         <label for="node-input-arg_minscale">Low range value</label>
