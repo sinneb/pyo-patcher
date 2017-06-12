@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Add',{
+        category: 'pyo arithmetic',
+        color: '#e5ecf3',
+        defaults: {
+          arg_in: {value:1},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["in","add"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Add";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Add">
+    <div class="form-row">
+      <label for="node-input-arg_mult">Addition</label>
+      <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Add">
+    <p>Simple addition to incoming values</p>
+</script>

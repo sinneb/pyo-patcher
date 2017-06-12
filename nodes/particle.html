@@ -3,8 +3,8 @@
         category: 'pyo tables',
         color: '#ebd676',
         defaults: {
-          arg_table: {value:'tablename'},
-          arg_env: {value:'tablename'},
+          arg_table: {value:'dummytable'},
+          arg_env: {value:'dummytable'},
           arg_dens:{value:50},
           arg_pitch:{value:1},
           arg_pos:{value:0},
@@ -13,8 +13,8 @@
           arg_mul:{value:1},
           arg_add:{value:0}
         },
-        inputs:6,
-        inputLabels: ["dens","pitch","pos","dur","dev","mul"],
+        inputs:8,
+        inputLabels: ["table", "env", "dens","pitch","pos","dur","dev","mul"],
         outputs:1,
         outputLabels: ["audio"],
         icon: "file.png",
@@ -26,10 +26,6 @@
 
 <script type="text/x-red" data-template-name="Particle">
     <div class="form-row">
-        <label for="node-input-arg_table">Table</label>
-        <input type="text" id="node-input-arg_table"><br/>
-        <label for="node-input-arg_env">Env</label>
-        <input type="text" id="node-input-arg_env"><br/>
         <label for="node-input-arg_dens">Density</label>
         <input type="text" id="node-input-arg_dens"><br/>
         <label for="node-input-arg_pitch">Pitch</label>

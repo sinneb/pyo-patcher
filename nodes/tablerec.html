@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('TableRec',{
+        category: 'pyo tables',
+        color: '#efefef',
+        defaults: {
+          arg_tablename: {value:"tablename"}
+        },
+        inputs:2,
+        inputLabels: ["input","trigger"],
+        outputs:1,
+        outputLabels: ["to_table"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"TableRec";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="TableRec">
+    <div class="form-row">
+
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="TableRec">
+    <p>TableRec is for writing samples into a table.</p>
+</script>

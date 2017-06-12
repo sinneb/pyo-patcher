@@ -3,14 +3,14 @@
         category: 'pyo tables',
         color: '#ebd676',
         defaults: {
-          arg_table: {value:'tablename'},
+          arg_table: {value:'dummytable'},
           arg_freq:{value:0.1},
           arg_phase:{value:0},
           arg_mul:{value:1},
           arg_add:{value:0}
         },
-        inputs:3,
-        inputLabels: ["freq","phase","mul"],
+        inputs:5,
+        inputLabels: ["table","freq","phase","mul","add"],
         outputs:1,
         outputLabels: ["audio"],
         icon: "file.png",
@@ -22,8 +22,6 @@
 
 <script type="text/x-red" data-template-name="Osc">
     <div class="form-row">
-        <label for="node-input-arg_table">Table</label>
-        <input type="text" id="node-input-arg_table"><br/>
         <label for="node-input-arg_freq">Frequency</label>
         <input type="text" id="node-input-arg_freq"><br/>
         <label for="node-input-arg_phase">Phase</label>

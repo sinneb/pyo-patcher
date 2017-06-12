@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Follower2',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_input: {value:'dummy'},
+          arg_risetime:{value:0.01},
+          arg_falltime:{value:0.1},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:4,
+        inputLabels: ["input","risetime","falltime", "mul"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Follower2";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Follower2">
+    <div class="form-row">
+        <label for="node-input-arg_freq">risetime</label>
+        <input type="text" id="node-input-arg_risetime"><br/>
+        <label for="node-input-arg_freq">falltime</label>
+        <input type="text" id="node-input-arg_falltime"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Follower2">
+    <p>Envelope follower.
+
+Output signal is the continuous mean amplitude of an input signal.</p>
+</script>

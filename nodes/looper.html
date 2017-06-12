@@ -1,0 +1,44 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Looper',{
+        category: 'pyo tables',
+        color: '#ebd676',
+        defaults: {
+          arg_table: {value:'dummytable'},
+          arg_start:{value:0},
+          arg_dur:{value:1},
+          arg_xfade:{value:20},
+          arg_startfromloop:{value:'True'},
+          arg_mul:{value:1},
+          arg_add:{value:0}
+        },
+        inputs:5,
+        inputLabels: ["table", "start", "dur","xfade","mul"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Looper";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Looper">
+    <div class="form-row">
+        <label for="node-input-arg_start">start</label>
+        <input type="text" id="node-input-arg_start"><br/>
+        <label for="node-input-arg_dur">dur</label>
+        <input type="text" id="node-input-arg_dur"><br/>
+        <label for="node-input-arg_xfade">xfade</label>
+        <input type="text" id="node-input-arg_xfade"><br/>
+        <label for="node-input-arg_startfromloop">startfromloop</label>
+        <input type="text" id="node-input-arg_startfromloop"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Looper">
+    <p>Crossfading looper. Looper reads audio from a PyoTableObject and plays it back in a loop with user-defined pitch, start time, duration and crossfade time. The mode argument allows the user to choose different looping modes.</p>
+</script>

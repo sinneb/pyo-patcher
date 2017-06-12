@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Input',{
+        category: 'pyo generators',
+        color: '#a6bbcf',
+        defaults: {
+          arg_chnl: {value:0},
+          arg_mul:{value:0.7},
+          arg_add:{value:0}
+        },
+        inputs:2,
+        inputLabels: ["mul","add"],
+        outputs:1,
+        outputLabels: ["audio"],
+        icon: "file.png",
+        label: function() {
+            return this.name||"Input";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Input">
+    <div class="form-row">
+        <label for="node-input-arg_chnl">Channel</label>
+        <input type="text" id="node-input-arg_freq"><br/>
+        <label for="node-input-arg_mul">Multiplication</label>
+        <input type="text" id="node-input-arg_mul"><br/>
+        <label for="node-input-arg_add">Addition</label>
+        <input type="text" id="node-input-arg_add"><br/>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Input">
+    <p>Read from a numbered channel in an external audio signal.</p>
+</script>

@@ -60,34 +60,39 @@ def createPyoScript(jsonstring):
     fileout.write("from pyo import *\n")
     fileout.write("from time import sleep\n")
     fileout.write("\n")
-    fileout.write("s = Server()\n")
+    fileout.write("s = Server(audio='jack')\n")
     #fileout.write("s.setInOutDevice(3)\n")
     fileout.write("s.setMidiInputDevice(99)\n")
     fileout.write("s.boot().start()\n\n")
     
-    # general dummy pyobject for init
+    # general dummy pyobjects for init
     fileout.write("dummy = LFO(freq=0)\n")
-    fileout.write("dummymidi = Notein()\n\n")
+    fileout.write("dummymidi = Notein()\n")
+    fileout.write("dummytable = NewTable(length=1, chnls=1)\n\n")
+    fileout.write("dummyinput = Input(chnl=0, mul=.7)\n\n")
     
     # tables
-    fileout.write("hann = HannTable()\n")
-    fileout.write("harm = HarmTable()\n")
-    fileout.write("log = LogTable()\n")
-    fileout.write("para = ParaTable()\n")
-    fileout.write("partial = PartialTable()\n")
-    fileout.write("saw = SawTable(order=32)\n")
-    fileout.write("sinc = SincTable()\n")
-    fileout.write("atan = AtanTable()\n")
-    fileout.write("padsynth = PadSynthTable()\n")
-    fileout.write("tuckey = WinTable(type=7)\n")
-    fileout.write("bartlett = WinTable(type=3)\n")
-    fileout.write("coslog = CosLogTable([(0,0), (4095,1), (8192,0)])\n")
+    # fileout.write("hann = HannTable()\n")
+#     fileout.write("harm = HarmTable()\n")
+#     fileout.write("log = LogTable()\n")
+#     fileout.write("para = ParaTable()\n")
+#     fileout.write("partial = PartialTable()\n")
+#     fileout.write("saw = SawTable(order=32)\n")
+#     fileout.write("sinc = SincTable()\n")
+#     fileout.write("atan = AtanTable()\n")
+#     fileout.write("padsynth = PadSynthTable()\n")
+#     fileout.write("tuckey = WinTable(type=7)\n")
+#     fileout.write("bartlett = WinTable(type=3)\n")
+#     fileout.write("coslog = CosLogTable([(0,0), (4095,1), (8192,0)])\n")
     
     # first write all tables to pyoscript
     for node in parsed_json:
-        if node['type']!='tab':
-            if node['type']=='SndTable':
-                fileout.write("%s = SndTable(\"%s\")\n" % (node['arg_tablename'], node['arg_path']))
+        #if node['type']!='tab':
+        if node['type']=='SndTable':
+            fileout.write("%s = SndTable(\"%s\")\n" % (node['id'], node['table']))
+        # write AKWF table for AKWFOscTrig
+        if node['type']=='AKWFOscTrig':
+            fileout.write("table_%s = SndTable(\"webroot/%s.wav\")\n" % (node['id'], node['table']))
                 
     fileout.write("\n")
         
@@ -103,7 +108,8 @@ def createPyoScript(jsonstring):
                 if(field[:4]=="arg_"):
                     if (field[4:]=="freq"):
                         # reserve 10 streams for poly
-                        argumentlist += "%s = [%s]*10, " % (field[4:], node[field])
+                        # for now 1 to save on resources
+                        argumentlist += "%s = [%s]*1, " % (field[4:], node[field])
                     else:
                         argumentlist += "%s = %s, " % (field[4:], node[field])
         
@@ -123,8 +129,17 @@ def createPyoScript(jsonstring):
                 fileout.write("%s = %s_mixer[0] + %s_mixer[1]\n" % (node['id'],node['id'],node['id']))
             elif node['type']=='Multiply':
                 fileout.write("%s = Allpass(input=[dummy]*10, delay=0, feedback=0, maxdelay=0, mul=%s)\n" % (node['id'], node['arg_mult']))
+            elif node['type']=='Add':
+                fileout.write("%s = Allpass(input=[dummy]*10, delay=0, feedback=0, maxdelay=0, mul=1, add=%s)\n" % (node['id'], node['arg_add']))
             elif node['type']=='SndTable':
                 pass
+            elif node['type']=='TableRec':
+                fileout.write("%s = TableRec(dummyinput, table=dummytable, fadetime=0.05)\n" % (node['id']))
+                # and write out its triggerfunction
+                fileout.write("def func_%s():\n" % (node['id']))
+                fileout.write("\t%s.play()\n\n" % (node['id']))
+            elif node['type']=='AKWFOscTrig':
+                fileout.write("%s = OscTrig(%s, table=%s)\n" % (node['id'], argumentlist,"table_"+node['id']))
             elif node['type']=='Metro':
                 fileout.write("%s = %s(%s).play()\n" % (node['id'], node['type'], argumentlist))
             elif node['type']=='Beat':
@@ -169,12 +184,16 @@ def createPyoScript(jsonstring):
                 subwirelist = list(grouper(3,wire))
             
                 for subwire in subwirelist:
+                    # print subwire
                     # find destination node type
                     destinationNodeType = ""
                     for destNode in parsed_json:
                         if destNode['type']!='tab' and destNode['id']==subwire[0]:
                             destinationNodeType = destNode['type']
                     
+                    print "---"
+                    print subwire
+                    print destinationNodeType
                     # handle special nodes
                     if destinationNodeType == 'out':
                         fileout.write("%s.addInput(%s,%s)\n" % (subwire[0],mixerkey,currentNodeID))
@@ -197,8 +216,18 @@ def createPyoScript(jsonstring):
                             fileout.write("%s.input = %s\n" % (subwire[0],currentNodeID))
                         if subwire[2] == 'mult':
                             fileout.write("%s.mul = %s\n" % (subwire[0],currentNodeID))
+                    elif destinationNodeType == 'Add':
+                        if subwire[2] == 'in':
+                            fileout.write("%s.input = %s\n" % (subwire[0],currentNodeID))
+                        if subwire[2] == 'add':
+                            fileout.write("%s.add = %s\n" % (subwire[0],currentNodeID))
+                    elif destinationNodeType == 'TableRec' and subwire[2] == 'trigger':
+                        fileout.write("%s_trig = TrigFunc(%s,func_%s)\n" % (subwire[0],currentNodeID,subwire[0]))
+                    elif destinationNodeType == 'SndTable' and subwire[2] == 'rec_in':
+                        fileout.write("%s.table = %s\n" % (currentNodeID, subwire[0]))
                     else:
                         #[u'pyo2abb2adff7f916', 0, u'freq']
+                        # the x of the y = myself
                         fileout.write("%s.%s = %s\n" % (subwire[0], subwire[2], currentNodeID))
                     
                 wireID+=1;
