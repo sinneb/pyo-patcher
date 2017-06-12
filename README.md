@@ -1,7 +1,7 @@
 # pyo-patcher
 ![](http://sinneb.net/pyo-patcher/pyo-patcher-11april.png)
 
-Checkout the [wiki](https://github.com/sinneb/pyo-patcher/wiki) for step by step usage instructions
+Checkout the [wiki](https://github.com/sinneb/pyo-patcher/wiki/Welcome-to-the-pyo-patcher-wiki) for step by step usage instructions
 
 pyo-patcher is a visual programming environment to create [pyo](http://ajaxsoundstudio.com/software/pyo/) DSP scripts. It runs on a modified version of [Node-RED](https://nodered.org/): flow-based programming for the Internet of Things. This modified version allows, among others, multiple inputs, does not save states (for multiuser online use) and displays port names. The pyo flows are almost Node-RED standard JSON file exports, which, upon download, are picked up by a local Python compiler script. The compiler translates the JSON flow to a pyo script and runs it. The download - compile - run cycle typically takes less than a second to run, which provides almost-instant feedback to the user. 
 
